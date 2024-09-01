@@ -1,0 +1,8 @@
+## Modelos de Otimização
+Considerando multiplos fatores como a distância do entregador até o ponto de coleta, o tempo estimado de entrega, a capacidade do entregador, entre outros.
+
+## Algoritmos de matching
+Algoritmo de Hungarian ou o Algoritmo de Gale-Shapley (stable matching).
+
+## Batch Processing
+Processamento das alocações em lote.

@@ -1,0 +1,58 @@
+Instalar o Jest
+Instale o Jest como dependência de desenvolvimento.
+
+bash
+Copiar código
+npm install --save-dev jest
+Configurar o Jest
+No seu package.json, adicione uma seção para o Jest e configure um script para executar os testes.
+
+json
+Copiar código
+{
+  "scripts": {
+    "test": "jest"
+  }
+}
+Criar um Teste Unitário
+Vamos criar um arquivo de teste para uma função simples. Por exemplo, uma função que soma dois números.
+
+Criar a Função a Ser Testada
+Crie um arquivo math.js com a função add.
+
+javascript
+Copiar código
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = add;
+Criar o Teste para a Função
+Em uma estrutura comum, os arquivos de teste ficam em uma pasta separada (como __tests__) ou no mesmo diretório, mas com um sufixo como .test.js.
+
+Vamos criar um arquivo de teste para a função add em __tests__/math.test.js.
+
+javascript
+Copiar código
+const add = require('../math');
+
+test('add 1 + 2 to equal 3', () => {
+  expect(add(1, 2)).toBe(3);
+});
+
+test('add -1 + 1 to equal 0', () => {
+  expect(add(-1, 1)).toBe(0);
+});
+Executar o Teste
+Agora, execute o script de teste para verificar se tudo está funcionando corretamente.
+
+bash
+Copiar código
+npm test
+Se tudo estiver correto, você verá uma saída indicando que os testes passaram. Se um teste falhar, o Jest fornecerá informações sobre o erro, permitindo corrigir o problema.
+
+Outras Considerações
+Mocks e Spies: O Jest permite criar mocks e espiões para testar interações com outras partes do código.
+Cobertura de Testes: Com o Jest, é possível gerar relatórios de cobertura para visualizar quais partes do código estão sendo testadas.
+Testes Assíncronos: O Jest suporta testes para código assíncrono, como funções que retornam Promise ou usam async/await.
+Com essa base, você deve ser capaz de começar a escrever testes unitários no Node.js usando o Jest. Dependendo do seu projeto, você pode precisar de ferramentas adicionais para testar integrações, banco de dados, ou outros componentes do sistema. No entanto, testes unitários são um ótimo ponto de partida.
