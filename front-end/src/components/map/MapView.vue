@@ -4,4 +4,4 @@
 
 <script src="./index.js"></script>
 
-<style scoped src="./style.css"></style>
+<style scoped src="./mapStyle.css"></style>

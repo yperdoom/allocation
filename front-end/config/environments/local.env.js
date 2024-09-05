@@ -1,0 +1,9 @@
+const NODE_ENV = "development"
+const API_BASE_URL = "https://api.dev.amo.delivery"
+const API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfdHlwZSI6InBhbmVsIiwidXNlcl9pZCI6IjU5ZmJjODFiOGNlOTVjMDAwZjllYjZlOSIsIm5hbWUiOiJQZWRybyBQaW50byIsImVtYWlsIjoicGVkcm8ucGludG9AYW1vLmRlbGl2ZXJ5Iiwic2NvcGUiOiJhZG1pbiIsInRva2VuX2lkIjoiNjZkNzY2Yjk2NDM5NjBhMTBlZDY5NzdiIiwiaWF0IjoxNzI1MzkyNTY5fQ.aXKBe5JopHMGiuO_837qbiCoB5N7iy6ACMXwRJdDV0c"
+
+export {
+  NODE_ENV,
+  API_BASE_URL,
+  API_TOKEN
+}
