@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
-import router from '@/router';
-export const socketStore = defineStore('deliveries', {
+export const deliveriesStore = defineStore('deliveries', {
   state: () => ({
     deliveries: [],
     deliveryId: null,
@@ -17,13 +16,22 @@ export const socketStore = defineStore('deliveries', {
     }
   },
   actions: {
-    async loadDeliveries() {
-      if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
-        this.connectSocket();
-      }
-    },
-    async setDeliveryId(deliveryId) {
+    setDeliveryId(deliveryId) {
       this.deliveryId = deliveryId;
+    },
+    addDelivery(delivery) {
+      this.deliveries.push(delivery);
+
+      // update map
+    },
+    updateDrivery(delivery) {
+      for (let i = 0; i < this.deliveries.length; i++) {
+        if (this.deliveries[i].id === delivery.id) {
+          this.deliveries.splice(i, 1, delivery);
+        }
+      }
+
+      // update map
     }
   }
 })

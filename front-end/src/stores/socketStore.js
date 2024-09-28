@@ -14,7 +14,22 @@ export const socketStore = defineStore('deliveries', {
       };
 
       this.socket.onmessage = (event) => {
-        console.log('Mensagem recebida do servidor:', event.data);
+        const data = JSON.parse(event.data);
+        console.log('Mensagem recebida do servidor:', data);
+
+        if (data.type === 'newDelivery') {
+          console.log('added delivery')
+        }
+        if (data.type === 'updateDelivery') {
+          console.log('updated delivery')
+        }
+
+        if (data.type === 'newDriver') {
+          console.log('added driver')
+        }
+        if (data.type === 'updateDriver') {
+          console.log('updated driver')
+        }
       };
 
       this.socket.onerror = (error) => {

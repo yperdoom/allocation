@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
-import router from '@/router';
-export const socketStore = defineStore('drivers', {
+export const driversStore = defineStore('drivers', {
   state: () => ({
     drivers: [],
     driverId: null,
@@ -17,8 +16,22 @@ export const socketStore = defineStore('drivers', {
     }
   },
   actions: {
-    async setDriverId(driverId) {
+    setDriverId(driverId) {
       this.driverId = driverId;
+    },
+    addDriver(driver) {
+      this.drivers.push(driver);
+
+      // update map
+    },
+    updateDriver(driver) {
+      for (let i = 0; i < this.drivers.length; i++) {
+        if (this.drivers[i].id === driver.id) {
+          this.drivers.splice(i, 1, driver);
+        }
+      }
+
+      // update map
     }
   }
 })
