@@ -1,17 +1,17 @@
-import { deliveriesStore } from '@/stores/deliveriesStore';
+import { socketStore } from '@/stores/socketStore';
 
 export default {
   name: 'MenuView',
   methods: {
     // eslint-disable-next-line
     async request(event) {
-      const useDeliveriesStore = deliveriesStore()
-      useDeliveriesStore.loadDeliveries();
+      const usesocketStore = socketStore()
+      usesocketStore.loadDeliveries();
     }
   },
   onBeforeUnmount() {
-    if (deliveriesStore.socket) {
-      deliveriesStore.socket.disconnect();
+    if (socketStore.socket) {
+      socketStore.socket.disconnect();
     }
   }
 };
