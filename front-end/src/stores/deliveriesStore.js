@@ -1,11 +1,12 @@
-// import api from '../../services/api';
-import { api } from '@/services/api';
 import { defineStore } from 'pinia';
+import router from '@/router'; // Importe o router
+// const socket = new WebSocket('ws://localhost:3333/map');
 
 export const deliveriesStore = defineStore('deliveries', {
   state: () => ({
     deliveries: [],
-    deliveryId: null
+    deliveryId: null,
+    socket: null,
   }),
   getters: {
     getDeliveries() {
@@ -19,37 +20,32 @@ export const deliveriesStore = defineStore('deliveries', {
     }
   },
   actions: {
+    connectSocket() {
+      this.socket = new WebSocket('ws://localhost:3333/map');
+      this.socket.onopen = () => {
+        console.log('Conectado ao WebSocket');
+        this.socket.send('Olá, servidor!');
+      };
+
+      this.socket.onmessage = (event) => {
+        console.log('Mensagem recebida do servidor:', event.data);
+      };
+
+      this.socket.onerror = (error) => {
+        console.error('Erro no WebSocket:', error);
+      };
+
+      this.socket.onclose = () => {
+        console.log('Conexão WebSocket fechada');
+      };
+    },
+
     async loadDeliveries() {
-      const filters = [
-        'fields=pickup.address',
-        'fields=region',
-        'fields=status',
-        'fields=delivery_man._id',
-        'fields=ref',
-        'region=riodosindios',
-        'status=allocating',
-        //&status=allocated&status=collecting&status=collected`
-      ]
-      let params = ''
-
-      for (let i = 0; i < filters.length; i++) {
-        params += filters[i]
-
-        if (i !== (filters.length - 1)) {
-          params += '&'
-        }
+      if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
+        this.connectSocket();
       }
 
-      await api.get(`/deliveries?${params}`).catch(() => {
-        alert("não foi possível pegar os dados da entrega!");
-      }).then(({ data, status }) => {
-        if (status === 200) {
-          if (data.docs.length === 0) {
-            alert("nenhuma entrega encontrada :/");
-          }
-          this.deliveries = data.docs
-        }
-      });
+      router.push({ name: 'map' }); // Direciona para a tela com o mapa
     },
     async setDeliveryId(deliveryId) {
       this.deliveryId = deliveryId;

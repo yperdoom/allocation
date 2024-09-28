@@ -1,17 +1,17 @@
 <template>
   <div id="App">
-    <MenuView />
+    <router-view />
   </div>
 </template>
 
 <script>
-import MenuView from './components/menu/MenuView.vue';
+// import MenuView from './views/menu/MenuView.vue';
 
 export default {
   name: 'App',
-  components: {
-    MenuView,
-  },
+  // components: {
+  //   MenuView,
+  // },
 };
 </script>
 
