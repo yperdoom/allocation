@@ -4,15 +4,31 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:app": "ts-node-dev src/index.ts --respawn --transpileOnly || ",
-    "dev:server": "ts-node-dev src/index.ts --respawn --transpileOnly"
+    "expose":"ngrok http --region=sa --hostname=map-amodelivery.sa.ngrok.io 3333",
+    "build":"yarn api:build && yarn map:build",
+    "clean":"yarn clean:node && yarn api:clean && yarn map:clean",
+    "clean:node":"rimraf node_modules package-lock.json yarn.lock front-end/node_modules front-end/yarn.lock front-end/package-lock.json",
+    "api": "ts-node-dev src/index.ts --respawn --transpileOnly",
+    "api:build": "yarn install",
+    "api:clean":"yarn cache clean --force",
+    "map": "cd front-end && yarn serve",
+    "map:build":"cd front-end && yarn install",
+    "map:clean":"cd front-end && yarn cache clean --force"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/ws": "^8.5.12",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "rimraf": "6.0.1"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "ws": "^8.18.0"
   }
 }

@@ -1,16 +1,14 @@
 import { Express } from "express"
-import Logger from "../../../library/Logger"
-const log = new Logger()
+import { newDriver, updateDriver } from "./driversController"
+import notImplemented from "../../../domain/errors/notImplemented"
 
 export default (app: Express) => {
 
-  app.get('/drivers', () => {
-    log.log('get drivers')
-  })
+  app.get('/drivers', notImplemented)
 
-  app.post('/drivers', () => {
-    log.log('create drivers')
-  })
+  app.post('/drivers', newDriver)
+
+  app.put('/drivers', updateDriver)
 
   return app;
 }

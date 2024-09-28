@@ -1,16 +1,14 @@
 import { Express } from "express"
-import Logger from "../../../library/Logger"
-const log = new Logger()
+import { newDelivery, updateDelivery } from './deliveriesController';
+import notImplemented from "../../../domain/errors/notImplemented";
 
 export default (app: Express) => {
 
-  app.get('/deliveries', () => {
-    log.log('get deliveries')
-  })
+  app.get('/deliveries', notImplemented)
 
-  app.post('/deliveries', () => {
-    log.log('create deliveries')
-  })
+  app.post('/deliveries', newDelivery)
+
+  app.put('/deliveries', updateDelivery)
 
   return app;
 }

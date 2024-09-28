@@ -1,13 +1,16 @@
-import express from 'express';
+import app from './app';
+import appWs from './app-ws';
 import Logger from './library/Logger';
 import loadingRoutes from './config/loadingRoutes';
-
+const PORT = 3333;
 const log = new Logger();
-
-const app = express();
 
 const application = loadingRoutes(app);
 
-application.listen(3333, () => {
-  log.trace('api initiate now');
+
+const server = application.listen(PORT, () => {
+  log.trace(`api initiate now on port ${PORT}`);
 });
+
+const wss = appWs(server);
+application.set('wss', wss)
