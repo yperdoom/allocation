@@ -5,8 +5,8 @@ export default {
   methods: {
     // eslint-disable-next-line
     async request(event) {
-      const usesocketStore = socketStore()
-      usesocketStore.loadDeliveries();
+      const useSocketStore = socketStore()
+      useSocketStore.loadMap();
     }
   },
   onBeforeUnmount() {
