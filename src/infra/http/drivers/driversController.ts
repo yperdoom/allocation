@@ -15,7 +15,7 @@ export function newDriver(req: Request, res: Response, _next: NextFunction) {
 
   const message = {
     type: 'newDriver',
-    data: body
+    body
   };
 
   wss.clients.forEach((client: any) => {
@@ -39,7 +39,7 @@ export function updateDriver(req: Request, res: Response, _next: NextFunction) {
 
   const message = {
     type: 'updateDriver',
-    data: body
+    body
   };
 
   wss.clients.forEach((client: any) => {

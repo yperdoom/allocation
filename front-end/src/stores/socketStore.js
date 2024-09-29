@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
 import router from '@/router';
+import { deliveriesStore } from './deliveriesStore';
+import { driversStore } from './driversStore';
 
-export const socketStore = defineStore('deliveries', {
+export const socketStore = defineStore('socket', {
   state: () => ({
     socket: null,
   }),
@@ -14,21 +16,32 @@ export const socketStore = defineStore('deliveries', {
       };
 
       this.socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
+        let data = event.data;
+
+        try {
+          data = JSON.parse(data);
+        } catch (error) {
+          console.log(error.message);
+        }
+
         console.log('Mensagem recebida do servidor:', data);
 
         if (data.type === 'newDelivery') {
-          console.log('added delivery')
+          deliveriesStore().addDelivery(data.body);
+          router.replace({ name: 'map' });
         }
         if (data.type === 'updateDelivery') {
-          console.log('updated delivery')
+          deliveriesStore().updateDelivery(data.body);
+          router.replace({ name: 'map' });
         }
 
         if (data.type === 'newDriver') {
-          console.log('added driver')
+          driversStore().addDriver(data.body);
+          router.replace({ name: 'map' });
         }
         if (data.type === 'updateDriver') {
-          console.log('updated driver')
+          driversStore().updateDriver(data.body);
+          router.replace({ name: 'map' });
         }
       };
 

@@ -15,7 +15,7 @@ export function newDelivery(req: Request, res: Response, _next: NextFunction) {
 
   const message = {
     type: 'newDelivery',
-    data: body
+    body
   };
 
   wss.clients.forEach((client: any) => {
@@ -39,7 +39,7 @@ export function updateDelivery(req: Request, res: Response, _next: NextFunction)
 
   const message = {
     type: 'updateDelivery',
-    data: body
+    body
   };
 
   wss.clients.forEach((client: any) => {

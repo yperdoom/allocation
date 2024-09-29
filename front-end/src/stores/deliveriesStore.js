@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+
 export const deliveriesStore = defineStore('deliveries', {
   state: () => ({
     deliveries: [],
@@ -22,9 +23,10 @@ export const deliveriesStore = defineStore('deliveries', {
     addDelivery(delivery) {
       this.deliveries.push(delivery);
 
+      console.log(this.deliveries);
       // update map
     },
-    updateDrivery(delivery) {
+    updateDelivery(delivery) {
       for (let i = 0; i < this.deliveries.length; i++) {
         if (this.deliveries[i].id === delivery.id) {
           this.deliveries.splice(i, 1, delivery);
